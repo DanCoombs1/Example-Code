@@ -5,32 +5,10 @@ Created on Sat Aug 27 14:05:12 2022
 
 @author: dan_coombs99
 """
-import matplotlib.pyplot as plt
-import csv
-import datetime
 
-time = []
-timee = list(range(0,365))
-population = 3000
 
-infected = []
-for row in csv.reader(open('/Users/dan_coombs99/Documents/masters/diss/data_2022-Aug-24.csv')):
-    row[3] = datetime.datetime.strptime(row[3], '%Y-%m-%d') # Parse date.
-    infected.append(int(row[4]))
-    time.append(row[3])
-        
-infected_per = [x / population for x in infected]
 
-i = [0, 365]
-element = []
-for index in range(0,365):
-    element.append(infected[index])
-#print(element)
 
-infected_per2 = [x / population for x in element]
-
-zero = 100
-list_of_zeros = [0] * zero
 
 #all imports
 import math
@@ -40,12 +18,16 @@ import copy
 from random import gauss
 from random import randint
 from scipy.integrate import simpson
+import matplotlib.pyplot as plt
+import csv
+import datetime
+
 
 random.seed(19)
 
 #Parameters
-Day = 730 #- zero#number of days
-heard_immunity = 60
+Day = 730 #number of days
+heard_immunity = 60 # days until herd immunity
 vac_day = 272  #how many days the vaccine took to be released
 vac_pop_percent = 0.00434587375 #how quickly the vaccine was distributed
 #vac_pop_percent = 0.0035 #2 vaccines
@@ -67,10 +49,14 @@ immunityChance = 0.5
 immunityChance_vac = 0.8
 unimmuneDay = 90
 
+time = []
+timee = list(range(0,365))
+population = 3000
+
 
 #create a grid
-row = 100
-col = 100
+row = 250
+col = 250
 N = row*col
 
 grid = numpy.asarray([[0 for i in range(col)] for j in range(row)])
@@ -86,7 +72,7 @@ for cell in grid:
     ('   '.join(map(str, cell)))
  
  
-def agents_neighbours(x,y):
+def agents_neighbours(x,y): #function that counts infected neighbours in grid
     infectedNeighbours = 0
     #               UP     RIGHT    DOWN    LEFT
     neighbours = [(x+1,y),(x,y+1),(x-1,y),(x,y-1)]
@@ -111,7 +97,7 @@ def percent_vac(): #function to calculate percent of population that is vaccinat
  
     
 #daysBetweenDoses = 21 
-def doseinterval():
+def doseinterval(): #time between vaccines
     for x in range(col):
         for y in range(row):
             DaysBetweenDoses[x][y] = randint(21, 84)
@@ -123,33 +109,10 @@ doseinterval()
 #    ('   '.join(map(str, cell)))
 
 
-#def vaccination():
-#    res = percent_vac()
-#    interval = doseinterval()
-#    infection_grid = copy.deepcopy(grid)
-#    global days
-#    if res <= percent_of_pop_1:
-#        vac_going_ahead = True #not everyone vaccinated
-#    else:
-#        vac_going_ahead = False #enough of population vaccinated
-#    for x in range(col):
-#        for y in range(row):
-#            if vaccine_grid[x][y] == 0 and vac_going_ahead == True and days > vac_day and infection_grid[x][y] == 0: #add here grid = 0 or 99 maybe  can only be vaccinated is not infected
-#                ran = random.uniform(0,1)
- #               if ran <= vac_pop_percent: #certain percentage of the population getting vaccinated every day
- #                   vaccine_grid[x][y] = 1   
-                    
- #           elif vaccine_grid[x][y] == 1 and daysSinceFirstDose[x][y] < interval[x][y]:
-#                daysSinceFirstDose[x][y] += 1
-                
- #           if daysSinceFirstDose[x][y] == interval[x][y] and vaccine_grid[x][y] == 1 and res <= percent_of_pop_2 and infection_grid[x][y] == 0:
- #               vaccine_grid[x][y] = 2
- #               immune[x][y] = 2
-            
-
 def vaccination():
     res = percent_vac()
-    
+    #interval = doseinterval()
+    #infection_grid = copy.deepcopy(grid)
     global days
     if res <= percent_of_pop_1:
         vac_going_ahead = True #not everyone vaccinated
@@ -157,7 +120,7 @@ def vaccination():
         vac_going_ahead = False #enough of population vaccinated
     for x in range(col):
         for y in range(row):
-            if vaccine_grid[x][y] == 0 and vac_going_ahead == True and days > vac_day and grid[x][y] == 0: #add here grid = 0 or 99 maybe  can only be vaccinated is not infected
+            if vaccine_grid[x][y] == 0 and vac_going_ahead == True and days > vac_day and grid[x][y] == 0: 
                 ran = random.uniform(0,1)
                 if ran <= vac_pop_percent: #certain percentage of the population getting vaccinated every day
                     vaccine_grid[x][y] = 1   
@@ -171,7 +134,7 @@ def vaccination():
 
 
 
-def infection():
+def infection(): #probability of infection
     infection_grid = copy.deepcopy(grid)
     #global days
     for x in range(col):
@@ -286,6 +249,26 @@ for i in range(0,Day):
     days = days + 1
     Days_of_pandemic.append(pandemic_days)
     
+    
+    
+infected = []
+for row in csv.reader(open('/Users/dan_coombs99/Documents/masters/diss/data_2022-Aug-24.csv')):
+    row[3] = datetime.datetime.strptime(row[3], '%Y-%m-%d') # Parse date.
+    infected.append(int(row[4]))
+    time.append(row[3])
+        
+infected_per = [x / population for x in infected]
+
+i = [0, 365]
+element = []
+for index in range(0,365):
+    element.append(infected[index])
+#print(element)
+
+infected_per2 = [x / population for x in element]
+
+zero = 100
+list_of_zeros = [0] * zero
     
 #print("UnImmune Grid ")
 #for cell in unimmune_grid:
