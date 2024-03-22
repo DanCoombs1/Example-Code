@@ -65,11 +65,19 @@ This project is abuilt in Python and utilises stochastic methods to simulate the
 
 ## Results
 
-The simulation generates visualisations and comparative analysis of different vaccination plans, including:
+### Impact of Vaccine Parameters
 
-- Spread of the pandemic over time.
-- Impact of vaccination on infection rates.
-- Comparison of government strategies in controlling the pandemic.
+- **Vaccine Efficiency:** Simulations with more effective vaccines demonstrated greater effectiveness in reducing the overall burden of disease and slowing down the spread of the virus compared to less effective vaccines.
+
+- **Research & Development Time:** Longer R&D timelines for vaccine development led to delays in vaccination rollout, resulting in a prolonged period of high infection rates. 
+
+- **Distribution Outlay:** Variations in distribution outlay significantly influenced the speed and coverage of vaccine distribution. Efficient outlay strategies optimized vaccine delivery and accessibility, thereby impacting disease control outcomes.
+
+### A Better Plan
+
+- **A Combination of Simulations:** The final simulation, integrating optimised R&D timelines and distribution outlay strategies, presented an effective vaccination plan that balanced speed and coverage. Targeted vaccination campaigns and efficient resource allocation were critical in mitigating disease transmission and reducing overall morbidity and mortality.
+
+The results underscore the critical importance of R&D time and distribution outlay in shaping the effectiveness of vaccination strategies against COVID-19. By identifying optimal parameters and strategies, the project provides valuable insights for policymakers and public health authorities in devising efficient and effective vaccination plans to combat the pandemic and future outbreaks.
 
 ## Contributing
 
