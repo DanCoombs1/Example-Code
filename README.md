@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is abuilt in Python and utilises stochastic methods to simulate the spread of the Coronavirus within a population grid. The project aims to provide insights into the dynamics of disease transmission and the impact of various interventions, particularly vaccination strategies, on controlling the spread of the virus.
+This project is built in Python and utilises stochastic methods to simulate the spread of the Coronavirus within a population grid. The project aims to provide insights into the dynamics of disease transmission and the impact of various interventions, particularly vaccination strategies, on controlling the spread of the virus.
 
 ## Table of Contents
 - [Purpose and Goals](#purpose-and-goals)
